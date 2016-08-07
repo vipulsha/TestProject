@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="runSuite" name="Batch3Framework">
+
+	<path id="Batch3Framework.classpath">
+		<pathelement location="bin" />
+		<pathelement location="Lib/selenium-server-standalone-2.53.1.jar" />
+		<pathelement location="Lib/testng.jar" />
+		<pathelement location="Lib/ATUReporter_Selenium_testNG_5.0.jar" />
+		<pathelement location="Lib/ATUTestRecorder_2.1.jar" />
+		<pathelement location="Lib/curvesapi-1.04.jar" />
+		<pathelement location="Lib/dom4j-1.3.jar" />
+		<pathelement location="Lib/poi-3.15-beta2.jar" />
+		<pathelement location="Lib/poi-ooxml-3.15-beta2.jar" />
+		<pathelement location="Lib/poi-ooxml-schemas-3.15-beta2.jar" />
+		<pathelement location="Lib/xmlbeans-2.6.0.jar" />
+		<pathelement location="Lib/jcommon-1.0.23.jar" />
+		<pathelement location="Lib/jfreechart-1.0.19.jar" />
+		<pathelement location="Lib/activation-1.1.jar" />
+		<pathelement location="Lib/mailapi.jar" />
+		<pathelement location="Lib/smtp.jar" />
+	</path>
+
+	<target name="deleteBin">
+		<delete dir="bin" />
+		<delete dir="Reports" />
+	</target>
+
+	<target name="createBin" depends="deleteBin">
+		<mkdir dir="bin" />
+	</target>
+
+	<target name="compile" depends="createBin">
+		<javac destdir="bin" srcdir="src" classpathref="Batch3Framework.classpath">
+		</javac>
+	</target>
+	
+	<taskdef resource="testngtasks" classpathref="Batch3Framework.classpath"/>
+	
+	<target name="runSuite" depends="compile">
+	    <testng classpathref="Batch3Framework.classpath">
+			<xmlfileset dir="." includes="testng.xml"/>		
+		</testng>
+	</target>
+</project>
